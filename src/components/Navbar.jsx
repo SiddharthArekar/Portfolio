@@ -83,20 +83,22 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Nav */}
+            {/* Mobile Nav */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-slate-950 border-b border-slate-800 overflow-hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-16 left-0 w-full md:hidden bg-slate-950 border-b border-slate-800 shadow-2xl"
                     >
-                        <div className="px-4 py-4 space-y-4">
+                        <div className="flex flex-col px-4 py-6 space-y-2">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    className="block text-slate-400 hover:text-sky-400 py-2"
+                                    className="block px-4 py-3 text-base font-medium text-slate-400 hover:text-sky-400 hover:bg-slate-900/50 rounded-xl transition-all"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {link.name}

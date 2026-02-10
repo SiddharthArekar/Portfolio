@@ -35,8 +35,8 @@ const Footer = () => {
                 <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 pb-16">
 
                     {/* Brand Column (Span 5) */}
-                    <div className="lg:col-span-5 space-y-8">
-                        <div className="flex flex-col gap-2">
+                    <div className="lg:col-span-5 space-y-8 flex flex-col items-center text-center lg:items-start lg:text-left">
+                        <div className="flex flex-col items-center lg:items-start gap-2">
                             <motion.div
                                 className="w-16 h-16 bg-gradient-to-tr from-sky-500/80 to-indigo-600/80 rounded-xl flex items-center justify-center text-3xl font-black text-white shadow-lg shadow-sky-500/20"
                                 whileHover={{ rotate: 180, borderRadius: "50%" }}
@@ -57,12 +57,12 @@ const Footer = () => {
                     </div>
 
                     {/* Navigation Column (Span 3) */}
-                    <div className="lg:col-span-3">
-                        <h3 className="text-white font-bold mb-6 flex items-center gap-2">
+                    <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left">
+                        <h3 className="text-white font-bold mb-6 flex items-center justify-center lg:justify-start gap-2">
                             <span className="w-2 h-2 rounded-sm bg-sky-500" />
                             Navigation
                         </h3>
-                        <ul className="space-y-4">
+                        <ul className="space-y-4 w-full flex flex-col items-center lg:items-start">
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
@@ -78,13 +78,8 @@ const Footer = () => {
                     </div>
 
                     {/* Connect Column (Span 4) */}
-                    <div className="lg:col-span-4 flex flex-col items-start lg:items-end">
-                        <h3 className="text-white font-bold mb-6 flex items-center gap-2 lg:flex-row-reverse">
-                            <span className="w-2 h-2 rounded-sm bg-indigo-500" />
-                            Connect
-                        </h3>
-
-                        <div className="flex gap-4">
+                    <div className="lg:col-span-4 flex flex-col items-center lg:items-end">
+                        <div className="flex gap-4 mt-4 lg:mt-0">
                             {[
                                 { icon: Github, href: "https://github.com/SiddharthArekar" },
                                 { icon: Linkedin, href: "https://www.linkedin.com/in/siddharth-arekar/" },
@@ -102,20 +97,6 @@ const Footer = () => {
                                 </motion.a>
                             ))}
                         </div>
-
-                        <div className="mt-8 p-4 bg-slate-900/30 rounded-xl border border-slate-800/50 w-full max-w-xs">
-                            <div className="flex items-center gap-3 text-xs text-slate-400 mb-2">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                </span>
-                                System Operational
-                            </div>
-                            <div className="text-xs text-slate-500">
-                                Latest deployment: <span className="text-white font-mono">v2.4.0</span>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 

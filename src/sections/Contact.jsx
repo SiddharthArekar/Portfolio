@@ -59,10 +59,10 @@ const Contact = () => {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-12 items-start">
+                <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
                     {/* Social Links */}
                     <div className="space-y-6">
-                        <div className="p-8 rounded-2xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm">
+                        <div className="p-5 md:p-8 rounded-2xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm">
                             <h3 className="text-2xl font-bold text-white mb-6">Contact Info</h3>
                             <div className="space-y-4">
                                 <a
@@ -74,7 +74,7 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm font-medium text-slate-500">Email</p>
-                                        <p className="font-medium text-white">siddhartharekar4@gmail.com</p>
+                                        <p className="font-medium text-white break-all">siddhartharekar4@gmail.com</p>
                                     </div>
                                 </a>
                                 <a
@@ -114,7 +114,7 @@ const Contact = () => {
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="p-8 rounded-2xl bg-slate-900 border border-slate-800 relative overflow-hidden"
+                        className="p-5 md:p-8 rounded-2xl bg-slate-900 border border-slate-800 relative overflow-hidden"
                     >
                         {/* Status Messages */}
                         {status === 'success' && (

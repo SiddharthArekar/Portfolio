@@ -32,7 +32,7 @@ const Hero = () => {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[100px] opacity-30 animate-pulse" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] opacity-30 animate-pulse delay-700" />
 
-            <div className="grid lg:grid-cols-2 gap-12 items-center w-full z-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-center w-full z-10 relative">
                 {/* Text Content */}
                 <motion.div
                     className="space-y-8 text-center lg:text-left"
@@ -74,7 +74,14 @@ const Hero = () => {
                         className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                         variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                     >
-                        <Button variant="primary" href="#projects">
+                        <Button
+                            variant="primary"
+                            href="#projects"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                        >
                             View Projects
                         </Button>
                         <Button variant="outline" href="/resume.pdf" target="_blank">

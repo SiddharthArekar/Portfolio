@@ -22,7 +22,7 @@ export const projectsData = [
             "AI-powered article summarization",
             "Personalized news categories"
         ],
-        github: "https://github.com/yourusername/news-app",
-        demo: "https://news-app-demo.netlify.app",
+        github: "https://github.com/SiddharthArekar/Satya_Varta",
+        demo: "https://satya-varta.vercel.app/",
     }
 ];

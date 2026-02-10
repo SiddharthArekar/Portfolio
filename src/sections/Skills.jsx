@@ -2,19 +2,34 @@ import { motion } from 'framer-motion';
 import SectionWrapper from '../components/SectionWrapper';
 import { skillsData } from '../data/skills';
 
-const SkillOrb = ({ skill, index }) => (
-    <motion.div
-        drag
-        dragConstraints={{ left: -20, right: 20, top: -20, bottom: 20 }}
-        initial={{ scale: 0, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ delay: index * 0.05, type: 'spring' }}
-        whileHover={{ scale: 1.1, zIndex: 10 }}
-        className="relative flex items-center justify-center p-4 bg-slate-800/50 backdrop-blur-md border border-slate-700 rounded-full cursor-pointer hover:bg-sky-500/20 hover:border-sky-500/50 transition-colors shadow-lg group"
-    >
-        <span className="text-slate-300 font-medium whitespace-nowrap group-hover:text-white transition-colors">{skill}</span>
-    </motion.div>
-);
+const SkillOrb = ({ skill, index }) => {
+    return (
+        <motion.div
+            drag
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+            dragElastic={0.1}
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.05, type: 'spring', stiffness: 200, damping: 20 }}
+            whileHover={{ scale: 1.05, zIndex: 10 }}
+            className="relative cursor-grab active:cursor-grabbing group"
+        >
+            <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                    duration: 2 + (index % 3), // Varied duration based on index
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: (index * 0.2) % 2 // Varied start time
+                }}
+                className="flex items-center justify-center px-5 py-2 md:px-6 md:py-3 bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-md border border-slate-700/50 hover:border-sky-500/50 rounded-full transition-colors shadow-lg hover:shadow-sky-500/20"
+            >
+                <span className="text-slate-300 text-sm md:text-base font-medium whitespace-nowrap group-hover:text-white transition-colors">{skill}</span>
+            </motion.div>
+        </motion.div>
+    );
+};
 
 const CategoryCluster = ({ category, icon: Icon, skills, index }) => {
     return (

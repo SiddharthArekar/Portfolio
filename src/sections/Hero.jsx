@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Cloud, Server, Database, Shield, Box } from 'lucide-react';
+import { ArrowDown, Cloud, Database, Shield, Globe, Cpu } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import Button from '../components/ui/Button';
 
@@ -28,7 +28,6 @@ const Hero = () => {
     return (
         <SectionWrapper id="home" className="min-h-screen flex items-center justify-center pt-32 relative overflow-hidden">
             {/* Background Grid & Effects */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[100px] opacity-30 animate-pulse" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] opacity-30 animate-pulse delay-700" />
 
@@ -111,10 +110,10 @@ const Hero = () => {
                         </motion.div>
 
                         {/* Orbiting Icons */}
-                        <FloatingIcon icon={Server} delay={0.2} x={-150} y={-100} color="text-indigo-400" />
+                        <FloatingIcon icon={Cpu} delay={0.2} x={-150} y={-100} color="text-indigo-400" />
                         <FloatingIcon icon={Database} delay={0.4} x={150} y={-100} color="text-emerald-400" />
                         <FloatingIcon icon={Shield} delay={0.6} x={-150} y={100} color="text-rose-400" />
-                        <FloatingIcon icon={Container} delay={0.8} x={150} y={100} color="text-amber-400" />
+                        <FloatingIcon icon={Globe} delay={0.8} x={150} y={100} color="text-amber-400" />
 
                         {/* Decorative Background Circles */}
                         <div className="absolute inset-0 m-auto w-[400px] h-[400px] border border-slate-800 rounded-full opacity-50 animate-spin-slow" />
@@ -135,7 +134,5 @@ const Hero = () => {
         </SectionWrapper>
     );
 };
-// Helper for fallback icon
-const Container = Box;
 
 export default Hero;

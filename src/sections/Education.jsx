@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { MapPin, Calendar, CheckCircle2, Sparkles, BookOpen } from 'lucide-react';
+import { MapPin, Calendar, CheckCircle2, BookOpen, GraduationCap } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 
 const Card3D = ({ children }) => {
@@ -110,7 +110,7 @@ const Education = () => {
 
                             <div>
                                 <h3 className="text-sky-400 font-bold tracking-widest text-xs uppercase mb-2 flex items-center gap-2 justify-center md:justify-start">
-                                    <Sparkles size={12} />
+                                    <GraduationCap size={16} />
                                     Master's Degree
                                 </h3>
                                 <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight drop-shadow-md">
@@ -145,7 +145,7 @@ const Education = () => {
                                     </div>
                                     <div>
                                         <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Timeline</p>
-                                        <p className="text-white font-medium text-lg">2024 - 2025</p>
+                                        <p className="text-white font-medium text-lg">2023 - 2025</p>
                                     </div>
                                 </motion.div>
 

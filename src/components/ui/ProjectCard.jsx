@@ -1,8 +1,11 @@
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, Code2, Layers, Cpu } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Github, Code2, ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card';
 
 const ProjectCard = ({ project, index }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         <Card className="flex flex-col h-full group relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-slate-800 hover:border-sky-500/30 transition-all duration-300">
             {/* Background Glow */}
@@ -54,15 +57,39 @@ const ProjectCard = ({ project, index }) => {
                 </div>
 
                 {/* Features List */}
-                <div className="mt-auto space-y-3 bg-slate-950/30 p-4 rounded-xl border border-slate-800/50">
-                    {project.features.slice(0, 3).map((feature, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0 shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
-                            <span className="text-sm text-slate-300">{feature}</span>
-                        </div>
-                    ))}
+                <div className="mt-auto space-y-3 bg-slate-950/30 p-4 rounded-xl border border-slate-800/50 transition-all duration-300">
+                    <div className="space-y-3">
+                        <AnimatePresence initial={false} mode="wait">
+                            {(isExpanded ? project.features : project.features.slice(0, 3)).map((feature, i) => (
+                                <motion.div
+                                    key={`${i}-${feature}`}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="flex items-start gap-3"
+                                >
+                                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0 shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
+                                    <span className="text-sm text-slate-300">{feature}</span>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </div>
+
                     {project.features.length > 3 && (
-                        <p className="text-xs text-slate-500 pl-4 italic">+ {project.features.length - 3} more features</p>
+                        <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="text-xs text-sky-400 pl-4 italic hover:text-sky-300 transition-colors flex items-center gap-1 cursor-pointer mt-2 w-full text-left"
+                        >
+                            {isExpanded ? (
+                                <>
+                                    Show Less <ChevronUp size={12} />
+                                </>
+                            ) : (
+                                <>
+                                    + {project.features.length - 3} more features <ChevronDown size={12} />
+                                </>
+                            )}
+                        </button>
                     )}
                 </div>
             </div>

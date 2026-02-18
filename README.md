@@ -21,7 +21,7 @@ This portfolio showcases:
 
 ## 🌐 Live Demo
 
-Visit my portfolio: [portfolio-iota-weld-faltyuvnhs.vercel.app](https://portfolio-iota-weld-faltyuvnhs.vercel.app)
+Visit my portfolio: [siddhartharekar](https://siddhartharekar.vercel.app)
 
 ## 🛠️ Tech Stack
 

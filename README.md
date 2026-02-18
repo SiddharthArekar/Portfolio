@@ -91,7 +91,7 @@ npm run build
 
 - **LinkedIn**: [linkedin.com/in/siddharth-arekar](https://linkedin.com/in/siddharth-arekar)
 - **GitHub**: [github.com/SiddharthArekar](https://github.com/SiddharthArekar)
-- **Email**: [siddharth@example.com](mailto:siddharth@example.com)
+- **Email**: [siddhartharekar3@gmail.com](mailto:siddhartharekar3@gmail.com)
 
 ## 📄 License
 

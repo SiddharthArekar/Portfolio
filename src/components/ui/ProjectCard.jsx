@@ -7,16 +7,25 @@ const ProjectCard = ({ project, index }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <Card className="flex flex-col h-full group relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-slate-800 hover:border-sky-500/30 transition-all duration-300">
-            {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/5 rounded-full blur-[80px] -z-10 group-hover:bg-sky-500/10 transition-colors duration-500" />
+        <Card className="flex flex-col h-full group relative overflow-hidden bg-slate-900 border border-slate-800 hover:border-sky-500/30 transition-all duration-300">
+            
+            {/* Card Background Fade Image */}
+            {project.image && (
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-20" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/80 to-slate-950" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-900/50 via-transparent to-transparent" />
+                </div>
+            )}
 
-            <div className="flex flex-col h-full z-10">
-                {/* Header */}
-                <div className="mb-6">
-                    <div className="flex justify-between items-start mb-4">
-                        <div className="p-3 bg-slate-800/50 rounded-xl border border-slate-700 text-sky-400">
-                            {/* Dynamic Icon based on Project Type (could be added to data properly later) */}
+            {/* Background Glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/5 rounded-full blur-[80px] z-0 group-hover:bg-sky-500/10 transition-colors duration-500 pointer-events-none" />
+
+            <div className="flex flex-col h-full relative z-10">
+                {/* Header Section */}
+                <div className="mb-6 pt-2">
+                    <div className="flex justify-between items-start mb-6">
+                        <div className="p-3 bg-slate-800/80 backdrop-blur-md rounded-2xl border border-slate-700/50 text-sky-400 shadow-xl group-hover:bg-sky-500/10 transition-colors">
                             <Code2 size={24} />
                         </div>
                         <div className="flex gap-2">
@@ -24,7 +33,7 @@ const ProjectCard = ({ project, index }) => {
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors border border-transparent hover:border-slate-700"
+                                className="p-2.5 bg-slate-900/50 backdrop-blur-md text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all border border-slate-800 hover:border-slate-700 shadow-lg"
                                 title="View Code"
                             >
                                 <Github size={20} />
@@ -34,7 +43,7 @@ const ProjectCard = ({ project, index }) => {
                                     href={project.demo}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors border border-transparent hover:border-slate-700"
+                                    className="p-2.5 bg-slate-900/50 backdrop-blur-md text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all border border-slate-800 hover:border-slate-700 shadow-lg"
                                     title="View Demo"
                                 >
                                     <ExternalLink size={20} />
@@ -43,8 +52,8 @@ const ProjectCard = ({ project, index }) => {
                         </div>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-sky-400 transition-colors">{project.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">{project.description}</p>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-sky-300 transition-colors drop-shadow-md leading-tight">{project.title}</h3>
+                    <p className="text-slate-300 text-sm leading-relaxed max-w-[95%] text-shadow-sm">{project.description}</p>
                 </div>
 
                 {/* Tech Stack Pills */}

@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import SectionWrapper from '../components/SectionWrapper';
-import { skillsData } from '../data/skills';
+import { Cloud, Terminal, Database, Code, Shield, GitBranch, Cpu, Zap, Globe, Lock, Server, Layers } from 'lucide-react';
+import { useSkillsData } from '../hooks/usePortfolioData';
+
+// Map icon names from Firestore to actual Lucide components
+const iconMap = { Cloud, Terminal, Database, Code, Shield, GitBranch, Cpu, Zap, Globe, Lock, Server, Layers };
 
 const SkillOrb = ({ skill, index }) => {
     return (
@@ -18,10 +22,10 @@ const SkillOrb = ({ skill, index }) => {
             <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{
-                    duration: 2 + (index % 3), // Varied duration based on index
+                    duration: 2 + (index % 3),
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: (index * 0.2) % 2 // Varied start time
+                    delay: (index * 0.2) % 2
                 }}
                 className="flex items-center justify-center px-5 py-2 md:px-6 md:py-3 bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-md border border-slate-700/50 hover:border-sky-500/50 rounded-full transition-colors shadow-lg hover:shadow-sky-500/20"
             >
@@ -31,7 +35,8 @@ const SkillOrb = ({ skill, index }) => {
     );
 };
 
-const CategoryCluster = ({ category, icon: Icon, skills, index }) => {
+const CategoryCluster = ({ category, iconName, skills, index }) => {
+    const Icon = iconMap[iconName] || Code;
     return (
         <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -41,11 +46,9 @@ const CategoryCluster = ({ category, icon: Icon, skills, index }) => {
             className="flex flex-col items-center"
         >
             <div className="relative mb-8">
-                {/* Central Category Node */}
                 <div className="w-24 h-24 rounded-full bg-slate-900 border-2 border-sky-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(14,165,233,0.2)] z-10 relative">
                     <Icon size={40} className="text-sky-400" strokeWidth={1.5} />
                 </div>
-                {/* Connecting Lines (Decorative) */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-slate-800 rounded-full -z-10" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-dashed border-slate-800 rounded-full -z-10 animate-spin-slow" />
             </div>
@@ -62,9 +65,10 @@ const CategoryCluster = ({ category, icon: Icon, skills, index }) => {
 };
 
 const Skills = () => {
+    const { data: skillsData } = useSkillsData();
+
     return (
         <SectionWrapper id="skills" className="relative overflow-hidden">
-            {/* Background Matrix Effect */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black -z-20"></div>
 
             <div className="text-center mb-20">
@@ -82,7 +86,7 @@ const Skills = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 max-w-7xl mx-auto">
                 {skillsData.map((category, index) => (
-                    <CategoryCluster key={index} {...category} index={index} />
+                    <CategoryCluster key={category.id || index} {...category} index={index} />
                 ))}
             </div>
         </SectionWrapper>

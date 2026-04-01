@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Cloud, Database, Shield, Globe, Cpu } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import Button from '../components/ui/Button';
+import { useHeroData } from '../hooks/usePortfolioData';
 
 const FloatingIcon = ({ icon: Icon, delay, x, y, color }) => (
     <motion.div
@@ -25,6 +26,8 @@ const FloatingIcon = ({ icon: Icon, delay, x, y, color }) => (
 );
 
 const Hero = () => {
+    const { data } = useHeroData();
+
     return (
         <SectionWrapper id="home" className="min-h-screen flex items-center justify-center pt-32 relative overflow-hidden">
             {/* Background Grid & Effects */}
@@ -47,18 +50,20 @@ const Hero = () => {
                     }}
                 >
                     <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-sky-400 text-sm font-medium mb-4">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-                            </span>
-                            Available for hire
-                        </div>
+                        {data.available && (
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-sky-400 text-sm font-medium mb-4">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                                </span>
+                                Available for hire
+                            </div>
+                        )}
                         <h2 className="text-slate-300 font-medium tracking-wide text-lg mb-2">
-                            Hello, I'm a
+                            {data.greeting}
                         </h2>
                         <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                            Cloud <span className="gradient-text">Engineer</span>
+                            {data.title} <span className="gradient-text">{data.titleHighlight}</span>
                         </h1>
                     </motion.div>
 
@@ -66,7 +71,7 @@ const Hero = () => {
                         className="text-slate-400 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed"
                         variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                     >
-                        Designing scalable infrastructure, automating deployments, and securing the cloud. Focused on <span className="text-white font-medium">AWS</span>, <span className="text-white font-medium">Kubernetes</span>, and  <span className="text-white font-medium">DevOps</span>.
+                        {data.description}
                     </motion.p>
 
                     <motion.div
@@ -75,16 +80,19 @@ const Hero = () => {
                     >
                         <Button
                             variant="primary"
-                            href="#projects"
+                            href={data.ctaPrimary?.href || '#projects'}
                             onClick={(e) => {
-                                e.preventDefault();
-                                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                                const href = data.ctaPrimary?.href;
+                                if (href?.startsWith('#')) {
+                                    e.preventDefault();
+                                    document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+                                }
                             }}
                         >
-                            View Projects
+                            {data.ctaPrimary?.label || 'View Projects'}
                         </Button>
-                        <Button variant="outline" href="/resume.pdf" target="_blank">
-                            Download Resume
+                        <Button variant="outline" href={data.activeResumeUrl || data.ctaSecondary?.href || '/resume.pdf'} target="_blank">
+                            {data.ctaSecondary?.label || 'Download Resume'}
                         </Button>
                     </motion.div>
                 </motion.div>
@@ -104,9 +112,17 @@ const Hero = () => {
                                 rotate: [0, 5, -5, 0]
                             }}
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                            className="z-20 relative bg-slate-900 border border-slate-700 p-8 rounded-3xl shadow-2xl shadow-sky-500/20"
+                            className={`z-20 relative bg-slate-900 border border-slate-700 flex items-center justify-center shadow-2xl shadow-sky-500/20
+                                ${data.heroImage ? 'w-56 h-56 md:w-64 md:h-64 rounded-full p-2' : 'p-8 rounded-3xl'}
+                            `}
                         >
-                            <Cloud size={64} className="text-sky-400" />
+                            {data.heroImage ? (
+                                <div className="w-full h-full rounded-full overflow-hidden bg-slate-800">
+                                    <img src={data.heroImage} alt="Profile / Hero" className="w-full h-full object-cover" />
+                                </div>
+                            ) : (
+                                <Cloud size={64} className="text-sky-400" />
+                            )}
                         </motion.div>
 
                         {/* Orbiting Icons */}

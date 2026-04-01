@@ -105,6 +105,15 @@ const Footer = () => {
                         © 2026 Siddharth Arekar.
                     </div>
 
+                    <a 
+                        href="/admin" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-slate-600 hover:text-sky-400 text-sm font-medium transition-colors"
+                    >
+                        Admin
+                    </a>
+
                     <button
                         onClick={scrollToTop}
                         className="flex items-center gap-2 text-sm text-slate-400 hover:text-sky-400 transition-colors group"

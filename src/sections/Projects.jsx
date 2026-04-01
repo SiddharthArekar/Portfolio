@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import SectionWrapper from '../components/SectionWrapper';
 import ProjectCard from '../components/ui/ProjectCard';
-import { projectsData } from '../data/projects';
+import { useProjectsData } from '../hooks/usePortfolioData';
 
 const Projects = () => {
+    const { data: projectsData } = useProjectsData();
+
     return (
         <SectionWrapper id="projects" className="relative z-10 overflow-hidden">
             {/* Background Decoration */}
@@ -26,7 +28,7 @@ const Projects = () => {
             <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 {projectsData.map((project, index) => (
                     <motion.div
-                        key={index}
+                        key={project.id || index}
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}

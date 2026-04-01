@@ -9,6 +9,26 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 #050810;
+  }
+
+  /* Custom Scrollbar for Webkit Browsers */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[#050810];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700/80 rounded-full border-[1px] border-[#050810];
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-600;
   }
 }
 
@@ -19,5 +39,15 @@
 
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-indigo-400;
+  }
+
+  /* Utility class to hide scrollbar but keep scroll functionality */
+  .hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hidden-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }

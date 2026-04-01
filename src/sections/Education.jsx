@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { MapPin, Calendar, CheckCircle2, BookOpen, GraduationCap } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
+import { useEducationData } from '../hooks/usePortfolioData';
 
 const Card3D = ({ children }) => {
     const x = useMotionValue(0);
@@ -51,6 +52,7 @@ const Card3D = ({ children }) => {
 };
 
 const Education = () => {
+    const { data: edu } = useEducationData();
     return (
         <SectionWrapper id="education" className="min-h-[70vh] flex flex-col items-center justify-center overflow-hidden">
 
@@ -102,8 +104,8 @@ const Education = () => {
                                 className="inline-flex p-4 rounded-2xl bg-white/5 border border-white/10 shadow-lg shadow-sky-500/20 mb-2 backdrop-blur-sm group hover:scale-105 transition-transform duration-300"
                             >
                                 <img
-                                    src="/Reva University.png"
-                                    alt="Reva University Logo"
+                                    src={edu.logoUrl}
+                                    alt={`${edu.university} Logo`}
                                     className="w-16 h-16 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
                                 />
                             </motion.div>
@@ -111,12 +113,12 @@ const Education = () => {
                             <div>
                                 <h3 className="text-sky-400 font-bold tracking-widest text-xs uppercase mb-2 flex items-center gap-2 justify-center md:justify-start">
                                     <GraduationCap size={16} />
-                                    Master's Degree
+                                    {edu.degreeType}
                                 </h3>
                                 <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight drop-shadow-md">
-                                    Master of Computer <br />
+                                    {edu.degree.split(' ').slice(0, -1).join(' ')} <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-200 to-sky-400 animate-gradient-x bg-[length:200%_auto]">
-                                        Applications
+                                        {edu.degree.split(' ').slice(-1)[0]}
                                     </span>
                                 </h2>
                             </div>
@@ -124,7 +126,7 @@ const Education = () => {
                             <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start pt-4">
                                 <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm hover:bg-white/10 transition-colors cursor-default">
                                     <BookOpen size={16} className="text-indigo-400" />
-                                    Reva University
+                                    {edu.university}
                                 </span>
                             </div>
                         </div>
@@ -145,7 +147,7 @@ const Education = () => {
                                     </div>
                                     <div>
                                         <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Timeline</p>
-                                        <p className="text-white font-medium text-lg">2023 - 2025</p>
+                                        <p className="text-white font-medium text-lg">{edu.timeline}</p>
                                     </div>
                                 </motion.div>
 
@@ -159,7 +161,7 @@ const Education = () => {
                                     </div>
                                     <div>
                                         <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Location</p>
-                                        <p className="text-white font-medium text-lg">Bengaluru, Karnataka</p>
+                                        <p className="text-white font-medium text-lg">{edu.location}</p>
                                     </div>
                                 </motion.div>
 
@@ -174,7 +176,7 @@ const Education = () => {
                                     <div>
                                         <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Status</p>
                                         <p className="text-emerald-400 font-bold text-lg flex items-center gap-2">
-                                            Completed
+                                            {edu.status}
                                             <span className="relative flex h-2 w-2">
                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>

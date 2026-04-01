@@ -1,28 +1,10 @@
 import { motion } from 'framer-motion';
 import { Briefcase, ChevronRight, Target } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
+import { useRoadmapData } from '../hooks/usePortfolioData';
 
 const Roadmap = () => {
-    const steps = [
-        {
-            title: "Cloud Engineer",
-            status: "current",
-            date: "Now",
-            description: "Building deep knowledge of AWS services, troubleshooting real-world incidents, and handling customer issues effectively.",
-        },
-        {
-            title: "Senior Cloud Engineer",
-            status: "upcoming",
-            date: "Next Step",
-            description: "Designing scalable architectures, implementing IaC (Terraform), and automating deployments.",
-        },
-        {
-            title: "DevOps Engineer",
-            status: "goal",
-            date: "Future Goal",
-            description: "Mastering Kubernetes, building advanced CI/CD pipelines, and ensuring site reliability at scale.",
-        }
-    ];
+    const { data: steps } = useRoadmapData();
 
     return (
         <SectionWrapper id="roadmap">
@@ -41,7 +23,7 @@ const Roadmap = () => {
                 <div className="space-y-12">
                     {steps.map((step, index) => (
                         <motion.div
-                            key={index}
+                            key={step.id || index}
                             className="relative flex gap-8 items-start"
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}

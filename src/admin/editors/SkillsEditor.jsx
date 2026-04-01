@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
+import { doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { Zap, Plus, Trash2 } from 'lucide-react';
 import { SectionHeader, Card } from './HeroEditor';
@@ -7,15 +7,31 @@ import { SectionHeader, Card } from './HeroEditor';
 const iconOptions = ['Cloud', 'Terminal', 'Database', 'Code', 'Shield', 'GitBranch', 'Cpu', 'Zap', 'Globe', 'Lock', 'Server', 'Layers'];
 
 const SkillsEditor = () => {
-    const [categories, setCategories] = useState([
+    const [categories, setCategories] = useState([]);
+    const [saving, setSaving] = useState(false);
+    const [saved, setSaved] = useState(false);
+    const [newSkill, setNewSkill] = useState({});
+
+    // Default data as fallback
+    const defaultCategories = [
         { id: '1', category: "Cloud & Platforms", iconName: "Cloud", skills: ["AWS EC2", "AWS S3", "AWS IAM", "CloudWatch", "Vercel", "Netlify"] },
         { id: '2', category: "DevOps & OS", iconName: "Terminal", skills: ["Linux Fundamentals", "Git & GitHub", "Bash Scripting", "CI/CD Basics"] },
         { id: '3', category: "Backend & Tools", iconName: "Database", skills: ["Firebase", "REST APIs", "Authentication", "Node.js Basics"] },
         { id: '4', category: "Modern Development", iconName: "Zap", skills: ["React", "Tailwind CSS", "AI-Assisted Coding", "Rapid Prototyping"] }
-    ]);
-    const [saving, setSaving] = useState(false);
-    const [saved, setSaved] = useState(false);
-    const [newSkill, setNewSkill] = useState({});
+    ];
+
+    // Real-time data fetching
+    useEffect(() => {
+        const unsub = onSnapshot(doc(db, 'portfolio', 'skills'), (docSnap) => {
+            if (docSnap.exists() && docSnap.data().categories) {
+                setCategories(docSnap.data().categories);
+            } else {
+                // Initialize with defaults if database is empty
+                setCategories(defaultCategories);
+            }
+        });
+        return () => unsub();
+    }, []);
 
     const handleSave = async () => {
         setSaving(true);
